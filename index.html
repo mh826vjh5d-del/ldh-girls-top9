@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>LDH Girls TOP9決定戦</title>
 
   <style>
@@ -12,13 +13,13 @@
 
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #fff;
+      font-family: Arial, "Hiragino Kaku Gothic ProN", sans-serif;
+      background: #f7f7f7;
       color: #222;
     }
 
     header {
-      background: linear-gradient(135deg, #111, #555);
+      background: linear-gradient(135deg, #111, #444);
       color: white;
       text-align: center;
       padding: 35px 15px;
@@ -35,9 +36,9 @@
     }
 
     .container {
-      padding: 20px;
       max-width: 900px;
       margin: auto;
+      padding: 20px;
     }
 
     .candidate {
@@ -46,8 +47,8 @@
       gap: 15px;
       padding: 12px;
       margin-bottom: 12px;
+      background: white;
       border-radius: 15px;
-      background: #f7f7f7;
       box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     }
 
@@ -58,15 +59,15 @@
       border-radius: 12px;
     }
 
+    .number {
+      color: #888;
+      font-size: 13px;
+      margin-bottom: 5px;
+    }
+
     .name {
       font-size: 18px;
       font-weight: bold;
-    }
-
-    .number {
-      color: #888;
-      font-size: 14px;
-      margin-bottom: 5px;
     }
 
     footer {
@@ -82,72 +83,69 @@
 
 <header>
   <h1>LDH Girls TOP9決定戦</h1>
-  <p>あなたが選ぶTOP9</p>
+  <p>あなたが選ぶLDH Girls TOP9</p>
 </header>
 
-<div class="container">
-
-  <div class="candidate">
-    <img src="IMG_7136.jpeg">
-    <div>
-      <div class="number">No.01</div>
-      <div class="name">小田柚葉</div>
-    </div>
-  </div>
-
-  <div class="candidate">
-    <img src="IMG_7137.jpeg">
-    <div>
-      <div class="number">No.02</div>
-      <div class="name">隅谷百花</div>
-    </div>
-  </div>
-
-  <div class="candidate">
-    <img src="IMG_7138.jpeg">
-    <div>
-      <div class="number">No.03</div>
-      <div class="name">鶴屋美咲</div>
-    </div>
-  </div>
-
-  <div class="candidate">
-    <img src="IMG_7141.jpeg">
-    <div>
-      <div class="number">No.04</div>
-      <div class="name">小川桜花</div>
-    </div>
-  </div>
-
-  <div class="candidate">
-    <img src="IMG_7142.jpeg">
-    <div>
-      <div class="number">No.05</div>
-      <div class="name">増田來亜</div>
-    </div>
-  </div>
-
-  <div class="candidate">
-    <img src="IMG_7143.jpeg">
-    <div>
-      <div class="number">No.06</div>
-      <div class="name">菱田未渚美</div>
-    </div>
-  </div>
-
-  <div class="candidate">
-    <img src="IMG_7144.jpeg">
-    <div>
-      <div class="number">No.07</div>
-      <div class="name">山口綺羅</div>
-    </div>
-  </div>
-
-</div>
+<div class="container" id="candidates"></div>
 
 <footer>
   LDH Girls TOP9決定戦
 </footer>
+
+<script>
+const candidates = [
+  ["小田柚葉", "IMG_7136.jpeg"],
+  ["隅谷百花", "IMG_7137.jpeg"],
+  ["鶴屋美咲", "IMG_7138.jpeg"],
+  ["小川桜花", "IMG_7141.jpeg"],
+  ["増田來亜", "IMG_7142.jpeg"],
+  ["菱田未渚美", "IMG_7143.jpeg"],
+  ["山口綺羅", "IMG_7144.jpeg"],
+  ["RUI", "IMG_7145.jpeg"],
+  ["YUNA", "IMG_7146.jpeg"],
+  ["HINATA", "IMG_7147.jpeg"],
+  ["山口莉愛", "IMG_7148.jpeg"],
+  ["永山椿", "IMG_7149.jpeg"],
+  ["深澤日彩", "IMG_7150.jpeg"],
+  ["比嘉優和", "IMG_7151.jpeg"],
+  ["佐藤栞奈", "IMG_7152.jpeg"],
+  ["上村梨々花", "IMG_7153.jpeg"],
+  ["森朱里", "IMG_7154.jpeg"],
+  ["佐藤妃希", "IMG_7155.jpeg"],
+  ["KAEDE", "IMG_7156.jpeg"],
+  ["SAYAKA", "IMG_7157.jpeg"],
+  ["MIYUU", "IMG_7158.jpeg"],
+  ["RURI", "IMG_7159.jpeg"],
+  ["MYU.S", "IMG_7160.jpeg"],
+  ["TOA", "IMG_7161.jpeg"],
+  ["YURARA", "IMG_7162.jpeg"],
+  ["MOMO", "IMG_7163.jpeg"],
+  ["NIKORI", "IMG_7164.jpeg"],
+  ["MYU.Y", "IMG_7165.jpeg"],
+  ["KOHARU", "IMG_7166.jpeg"],
+  ["MANON", "IMG_7167.jpeg"],
+  ["AGNES", "IMG_7168.jpeg"],
+  ["ASAMI", "IMG_7169.jpeg"],
+  ["LARISSA", "IMG_7170.jpeg"]
+];
+
+const container = document.getElementById("candidates");
+
+candidates.forEach((candidate, index) => {
+  const card = document.createElement("div");
+  card.className = "candidate";
+
+  card.innerHTML = `
+    <img src="${candidate[1]}" alt="${candidate[0]}">
+    <div>
+      <div class="number">No.${String(index + 1).padStart(2, "0")}</div>
+      <div class="name">${candidate[0]}</div>
+    </div>
+  `;
+
+  container.appendChild(card);
+});
+</script>
 
 </body>
 </html>
