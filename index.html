@@ -1,102 +1,327 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>LDH Girls TOP9決定戦</title>
+<title>LDH Girls TOP9</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+* {
+  box-sizing: border-box;
+}
 
-    body {
-      margin: 0;
-      font-family: Arial, "Hiragino Kaku Gothic ProN", sans-serif;
-      background: #f7f7f7;
-      color: #222;
-    }
+body {
+  margin: 0;
+  background: #fff;
+  color: #333;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+}
 
-    header {
-      background: linear-gradient(135deg, #111, #444);
-      color: white;
-      text-align: center;
-      padding: 35px 15px;
-    }
+.container {
+  max-width: 760px;
+  margin: auto;
+  padding: 20px 16px 40px;
+}
 
-    header h1 {
-      margin: 0;
-      font-size: 28px;
-    }
+h1 {
+  text-align: center;
+  font-size: 28px;
+  margin: 8px 0;
+}
 
-    header p {
-      margin: 10px 0 0;
-      font-size: 14px;
-    }
+.subtitle {
+  text-align: center;
+  color: #999;
+  margin-bottom: 20px;
+}
 
-    .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 20px;
-    }
+.progress {
+  height: 8px;
+  background: #eee;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
 
-    .candidate {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      padding: 12px;
-      margin-bottom: 12px;
-      background: white;
-      border-radius: 15px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: #ff9800;
+  transition: width .3s;
+}
 
-    .candidate img {
-      width: 80px;
-      height: 80px;
-      object-fit: cover;
-      border-radius: 12px;
-    }
+.question-number {
+  text-align: center;
+  color: #999;
+  margin-bottom: 12px;
+}
 
-    .number {
-      color: #888;
-      font-size: 13px;
-      margin-bottom: 5px;
-    }
+.vs-title {
+  text-align: center;
+  color: #ff9800;
+  font-weight: bold;
+  font-size: 22px;
+  margin-bottom: 18px;
+}
 
-    .name {
-      font-size: 18px;
-      font-weight: bold;
-    }
+.match-area {
+  position: relative;
+}
 
-    footer {
-      text-align: center;
-      padding: 30px;
-      color: #888;
-      font-size: 12px;
-    }
-  </style>
+.match {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.person {
+  text-align: center;
+}
+
+.person img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 20px;
+  display: block;
+  box-shadow: 0 3px 12px rgba(0,0,0,.12);
+}
+
+.name {
+  margin-top: 9px;
+  font-weight: bold;
+  font-size: 17px;
+}
+
+.vs {
+  position: absolute;
+  left: 50%;
+  top: 43%;
+  transform: translate(-50%, -50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #ff9800;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  border: 4px solid white;
+}
+
+.buttons {
+  display: grid;
+  gap: 11px;
+  margin-top: 24px;
+}
+
+button {
+  border: none;
+  border-radius: 40px;
+  padding: 16px;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.choice {
+  background: white;
+  color: #ff9800;
+  border: 3px solid #ff9800;
+}
+
+.both {
+  background: #ff9800;
+  color: white;
+}
+
+.unknown {
+  background: #f2f2f2;
+  color: #777;
+}
+
+.note {
+  text-align: center;
+  color: #aaa;
+  font-size: 12px;
+  margin-top: 18px;
+}
+
+/* 結果 */
+
+.result {
+  display: none;
+}
+
+.result h2 {
+  text-align: center;
+  font-size: 28px;
+}
+
+.result-sub {
+  text-align: center;
+  color: #999;
+  margin-bottom: 22px;
+}
+
+.ranking {
+  display: grid;
+  gap: 12px;
+}
+
+.rank-card {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 10px;
+  background: white;
+  border-radius: 18px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.1);
+}
+
+.rank-number {
+  width: 42px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.rank-card img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+.rank-name {
+  font-weight: bold;
+  font-size: 17px;
+}
+
+.rank-score {
+  margin-left: auto;
+  color: #999;
+  font-size: 13px;
+  padding-right: 8px;
+}
+
+.restart {
+  width: 100%;
+  margin-top: 25px;
+  background: #ff9800;
+  color: white;
+}
+</style>
 </head>
 
 <body>
 
-<header>
-  <h1>LDH Girls TOP9決定戦</h1>
-  <p>あなたが選ぶLDH Girls TOP9</p>
-</header>
+<div class="container">
 
-<div class="container" id="candidates"></div>
+  <!-- クイズ画面 -->
+  <div id="quiz">
 
-<footer>
-  LDH Girls TOP9決定戦
-</footer>
+    <h1>LDH Girls TOP9</h1>
+
+    <div class="subtitle">
+      33人の中からあなたのTOP9を決定！
+    </div>
+
+    <div class="progress">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="question-number" id="questionNumber">
+      対決 1
+    </div>
+
+    <div class="vs-title">
+      どっちが好き？
+    </div>
+
+    <div class="match-area">
+
+      <div class="match">
+
+        <div class="person">
+          <img id="leftImage">
+          <div class="name" id="leftName"></div>
+        </div>
+
+        <div class="person">
+          <img id="rightImage">
+          <div class="name" id="rightName"></div>
+        </div>
+
+      </div>
+
+      <div class="vs">VS</div>
+
+    </div>
+
+    <div class="buttons">
+
+      <button class="choice" onclick="answer('left')">
+        ← 左が好き
+      </button>
+
+      <button class="choice" onclick="answer('right')">
+        右が好き →
+      </button>
+
+      <button class="both" onclick="answer('both')">
+        どっちも好き
+      </button>
+
+      <button class="unknown" onclick="answer('unknown')">
+        わからない
+      </button>
+
+    </div>
+
+    <div class="note">
+      TOP9が決まるまで対決が続きます
+    </div>
+
+  </div>
+
+
+  <!-- 結果画面 -->
+  <div class="result" id="result">
+
+    <h1>LDH Girls TOP9</h1>
+
+    <h2>あなたのTOP9</h2>
+
+    <div class="result-sub">
+      あなたの回答から決定しました！
+    </div>
+
+    <div class="ranking" id="ranking"></div>
+
+    <button class="restart" onclick="restart()">
+      もう一度やる
+    </button>
+
+  </div>
+
+</div>
+
 
 <script>
+
+/* =========================================
+   33人
+   写真ファイルの順番も指定された順番
+   ========================================= */
+
 const candidates = [
+
   ["小田柚葉", "IMG_7136.jpeg"],
   ["隅谷百花", "IMG_7137.jpeg"],
   ["鶴屋美咲", "IMG_7138.jpeg"],
+
   ["小川桜花", "IMG_7141.jpeg"],
   ["増田來亜", "IMG_7142.jpeg"],
   ["菱田未渚美", "IMG_7143.jpeg"],
@@ -116,35 +341,509 @@ const candidates = [
   ["SAYAKA", "IMG_7157.jpeg"],
   ["MIYUU", "IMG_7158.jpeg"],
   ["RURI", "IMG_7159.jpeg"],
-  ["MYU.S", "IMG_7160.jpeg"],
-  ["TOA", "IMG_7161.jpeg"],
-  ["YURARA", "IMG_7162.jpeg"],
-  ["MOMO", "IMG_7163.jpeg"],
-  ["NIKORI", "IMG_7164.jpeg"],
-  ["MYU.Y", "IMG_7165.jpeg"],
-  ["KOHARU", "IMG_7166.jpeg"],
-  ["MANON", "IMG_7167.jpeg"],
-  ["AGNES", "IMG_7168.jpeg"],
-  ["ASAMI", "IMG_7169.jpeg"],
-  ["LARISSA", "IMG_7170.jpeg"]
+  ["AGNES", "IMG_7160.jpeg"],
+  ["ASAMI", "IMG_7161.jpeg"],
+  ["LARISSA", "IMG_7162.jpeg"],
+  ["MYU.S", "IMG_7163.jpeg"],
+  ["TOA", "IMG_7164.jpeg"],
+  ["YURARA", "IMG_7165.jpeg"],
+  ["MOMO", "IMG_7166.jpeg"],
+  ["NIKORI", "IMG_7167.jpeg"],
+  ["MYU.Y", "IMG_7168.jpeg"],
+  ["KOHARU", "IMG_7169.jpeg"],
+  ["MANON", "IMG_7170.jpeg"]
+
 ];
 
-const container = document.getElementById("candidates");
 
-candidates.forEach((candidate, index) => {
-  const card = document.createElement("div");
-  card.className = "candidate";
+/* =========================================
+   設定
+   ========================================= */
 
-  card.innerHTML = `
-    <img src="${candidate[1]}" alt="${candidate[0]}">
-    <div>
-      <div class="number">No.${String(index + 1).padStart(2, "0")}</div>
-      <div class="name">${candidate[0]}</div>
-    </div>
-  `;
+/*
+  最低60問。
 
-  container.appendChild(card);
-});
+  60問終わってもTOP9が安定していなければ
+  そのまま追加で対決する。
+*/
+
+const MIN_QUESTIONS = 60;
+
+
+/*
+  TOP9が同じ状態で15回続いたら
+  「TOP9が決まった」と判断して終了。
+
+  つまり60問ぴったりで終わるとは限らない。
+*/
+
+const STABLE_NEEDED = 15;
+
+
+/*
+  これ以上無限に続かないようにする安全上限。
+  普通はここまで行かない。
+*/
+
+const MAX_QUESTIONS = 300;
+
+
+let question = 0;
+
+let currentPair = [];
+
+let scores = [];
+
+let appearances = [];
+
+let usedPairs = new Set();
+
+let lastTop9 = null;
+
+let stableCount = 0;
+
+
+/* =========================================
+   初期化
+   ========================================= */
+
+function initialize() {
+
+  question = 0;
+
+  usedPairs = new Set();
+
+  lastTop9 = null;
+
+  stableCount = 0;
+
+  scores = candidates.map(() => 0);
+
+  appearances = candidates.map(() => 0);
+
+  document.getElementById("quiz").style.display = "block";
+
+  document.getElementById("result").style.display = "none";
+
+  nextQuestion();
+}
+
+
+/* =========================================
+   2人を選ぶ
+   ========================================= */
+
+function getPair() {
+
+  let pairs = [];
+
+  for (let i = 0; i < candidates.length; i++) {
+
+    for (let j = i + 1; j < candidates.length; j++) {
+
+      const key = i + "-" + j;
+
+      if (!usedPairs.has(key)) {
+
+        pairs.push([i, j]);
+
+      }
+
+    }
+
+  }
+
+
+  /*
+    出題回数が少ない人を優先。
+    33人全員ができるだけ均等に出る。
+  */
+
+  pairs.sort((a, b) => {
+
+    const aMin = Math.min(
+      appearances[a[0]],
+      appearances[a[1]]
+    );
+
+    const bMin = Math.min(
+      appearances[b[0]],
+      appearances[b[1]]
+    );
+
+    return aMin - bMin;
+
+  });
+
+
+  /*
+    同じ出題回数の中からランダム。
+  */
+
+  const lowest = Math.min(
+    ...pairs.map(pair =>
+      Math.min(
+        appearances[pair[0]],
+        appearances[pair[1]]
+      )
+    )
+  );
+
+
+  const available = pairs.filter(pair =>
+    Math.min(
+      appearances[pair[0]],
+      appearances[pair[1]]
+    ) === lowest
+  );
+
+
+  return available[
+    Math.floor(Math.random() * available.length)
+  ];
+}
+
+
+/* =========================================
+   現在のランキング
+   ========================================= */
+
+function getRanking() {
+
+  return candidates
+    .map((candidate, index) => {
+
+      /*
+        出題された回数の違いを補正。
+
+        例：
+        10回中8回選ばれた → 80%
+        10回中2回選ばれた → 20%
+      */
+
+      const rate =
+        appearances[index] > 0
+        ? scores[index] / appearances[index]
+        : 0;
+
+      return {
+        index: index,
+        name: candidate[0],
+        image: candidate[1],
+        score: scores[index],
+        rate: rate
+      };
+
+    })
+    .sort((a, b) => {
+
+      if (b.rate !== a.rate) {
+        return b.rate - a.rate;
+      }
+
+      return b.score - a.score;
+
+    });
+
+}
+
+
+/* =========================================
+   TOP9が安定したか確認
+   ========================================= */
+
+function checkTop9() {
+
+  /*
+    まず60問までは絶対に終了しない。
+  */
+
+  if (question < MIN_QUESTIONS) {
+    return false;
+  }
+
+
+  /*
+    全員が最低3回以上は出題されるようにする。
+  */
+
+  if (appearances.some(count => count < 3)) {
+    return false;
+  }
+
+
+  const ranking = getRanking();
+
+  const currentTop9 =
+    ranking
+      .slice(0, 9)
+      .map(person => person.index)
+      .sort((a, b) => a - b);
+
+
+  const currentString =
+    currentTop9.join(",");
+
+
+  if (lastTop9 === currentString) {
+
+    stableCount++;
+
+  } else {
+
+    stableCount = 1;
+
+    lastTop9 = currentString;
+
+  }
+
+
+  /*
+    TOP9が15回連続で同じなら終了。
+  */
+
+  return stableCount >= STABLE_NEEDED;
+}
+
+
+/* =========================================
+   次の問題
+   ========================================= */
+
+function nextQuestion() {
+
+  if (
+    question >= MIN_QUESTIONS &&
+    checkTop9()
+  ) {
+
+    showResult();
+
+    return;
+
+  }
+
+
+  /*
+    安全上限に到達した場合は
+    その時点のランキングを表示。
+  */
+
+  if (question >= MAX_QUESTIONS) {
+
+    showResult();
+
+    return;
+
+  }
+
+
+  currentPair = getPair();
+
+
+  let left = currentPair[0];
+
+  let right = currentPair[1];
+
+
+  /*
+    左右をランダムにする。
+  */
+
+  if (Math.random() < 0.5) {
+
+    const temp = left;
+
+    left = right;
+
+    right = temp;
+
+  }
+
+
+  currentPair = [left, right];
+
+
+  appearances[left]++;
+  appearances[right]++;
+
+
+  const pairKey = [
+    Math.min(left, right),
+    Math.max(left, right)
+  ].join("-");
+
+
+  usedPairs.add(pairKey);
+
+
+  document.getElementById("leftImage").src =
+    candidates[left][1];
+
+  document.getElementById("rightImage").src =
+    candidates[right][1];
+
+
+  document.getElementById("leftName").textContent =
+    candidates[left][0];
+
+  document.getElementById("rightName").textContent =
+    candidates[right][0];
+
+
+  document.getElementById("questionNumber").textContent =
+    `対決 ${question + 1}`;
+
+
+  /*
+    60問までは100%に近づき、
+    60問を超えたら「追加対決中」にする。
+  */
+
+  if (question < MIN_QUESTIONS) {
+
+    document.getElementById("progressBar").style.width =
+      `${(question / MIN_QUESTIONS) * 100}%`;
+
+  } else {
+
+    document.getElementById("progressBar").style.width =
+      "100%";
+
+  }
+
+}
+
+
+/* =========================================
+   回答
+   ========================================= */
+
+function answer(type) {
+
+  const left = currentPair[0];
+
+  const right = currentPair[1];
+
+
+  if (type === "left") {
+
+    scores[left] += 1;
+
+  }
+
+
+  if (type === "right") {
+
+    scores[right] += 1;
+
+  }
+
+
+  /*
+    どっちも好き
+    → 0.5点ずつ
+  */
+
+  if (type === "both") {
+
+    scores[left] += 0.5;
+
+    scores[right] += 0.5;
+
+  }
+
+
+  /*
+    わからない
+    → どちらにも点数を入れない
+  */
+
+
+  question++;
+
+
+  nextQuestion();
+
+}
+
+
+/* =========================================
+   結果
+   ========================================= */
+
+function showResult() {
+
+  document.getElementById("quiz").style.display =
+    "none";
+
+  document.getElementById("result").style.display =
+    "block";
+
+
+  const ranking = getRanking();
+
+
+  const area =
+    document.getElementById("ranking");
+
+
+  area.innerHTML = "";
+
+
+  ranking
+    .slice(0, 9)
+    .forEach((person, index) => {
+
+      const card =
+        document.createElement("div");
+
+      card.className = "rank-card";
+
+
+      card.innerHTML = `
+
+        <div class="rank-number">
+          ${index + 1}位
+        </div>
+
+        <img src="${person.image}">
+
+        <div class="rank-name">
+          ${person.name}
+        </div>
+
+        <div class="rank-score">
+          ${Math.round(person.rate * 100)}%
+        </div>
+
+      `;
+
+
+      area.appendChild(card);
+
+    });
+
+}
+
+
+/* =========================================
+   もう一度
+   ========================================= */
+
+function restart() {
+
+  initialize();
+
+}
+
+
+/* =========================================
+   スタート
+   ========================================= */
+
+initialize();
+
 </script>
 
 </body>
